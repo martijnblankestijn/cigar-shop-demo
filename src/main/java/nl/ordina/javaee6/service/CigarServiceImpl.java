@@ -9,6 +9,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 
 public class CigarServiceImpl implements CigarService {
@@ -16,7 +18,10 @@ public class CigarServiceImpl implements CigarService {
     public List<Cigar> getCigars() {
         System.out.println("Getting list of cigars");
 
-        return null;
+        final Cigar cigar = new Cigar();
+        cigar.setName("dummy");
+        cigar.setPrice(new BigDecimal("20.45"));
+        return Arrays.asList(cigar);
 
     }
 
