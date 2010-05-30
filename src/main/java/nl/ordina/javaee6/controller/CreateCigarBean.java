@@ -16,7 +16,6 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
-
 public class CreateCigarBean {
     private CigarService cigarService;
     private FacesContext ctx;
@@ -39,7 +38,6 @@ public class CreateCigarBean {
         
         cigarService.persist(cigar);
 
-        external.getFlash().setKeepMessages(true);
         ctx.addMessage(null, new FacesMessage("Give that man a cigar!!"));
         return "cigars";
     }
