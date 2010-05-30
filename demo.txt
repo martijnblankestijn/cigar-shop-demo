@@ -1,0 +1,94 @@
+==============================================
+=
+= CDI Presentatie, Na Example Named
+=
+==============================================
+Introductie demo applicatie.
+Tonen scherm met lege lijst (nog geen injectie)
+	Normale HTTP GET op jsf pagina
+	
+Op CigarBean @Named, @RequestScoped toevoegen
+	@Named ==> default unqualified class name, first character lowercase
+	@RequestScoped ==> Keuze voor een scope, default constructie per request is prima.
+@Inject toevoegen aan constructor
+	Service wordt geinjecteerd
+	Wat zit er eigenlijk in de service? Jump to source
+
+
+==============================================
+=
+= CDI Presentatie, Na CDI Stereotype
+=
+==============================================
+
+Vervang in CigarBean @RequestScoped @Named door @Model
+Plaats in CreateCigarBean @Model en voor de constructor @Inject, voor Cigar @New
+	@New zorgt voor een nieuwe instantie (met scope dependent)
+
+En nog iets: hoe komen we aan de referentie naar de FacesContext?
+Aanmaken @Produces @RequestScoped factory methode voor de FacesContext
+
+Plus aanmaken factory voor ExternalContext
+Aanmaken @Produces, @RequestScoped factory methode voor de ExternalContext met de FacesContext als parameter
+
+
+==============================================
+=
+= JSF Presentatie, Na JSF 2.0 Scopes
+=
+==============================================
+Bij het opslaan van een cigaar staat de url nog op newCigar.jsf ==> double submit problem, ugly
+
+Toevoegen in CreateCigarBean van ?faces-redirect=true
+	Let op de boodschap die verdwijnt.
+
+Toevoegen van externalContext.getFlash().setKeepMessages
+
+==============================================
+=
+= Validation Presentatie, Na validation presentation
+=
+==============================================
+Toepassen van validaties:
+@NotNull en
+Naam, @Size(min=3, max=40)
+Prijs @Digits(integer = 3, fraction = 2)
+
+
+==============================================
+=
+= Na de introductie
+=
+==============================================
+Cigar aanpassen ==> toevoegen  @Entiteit en @Id @GeneratedValue
+
+CigarServiceImpl
+Formuleren van de query m.b.v. JPQL. Aangeven dat dit ook al mogelijk was in JPA 1.0
+    @PersistenceContext private EntityManager em;
+ return em.createQuery("select c from Cigar c").getResultList();
+
+
+==============================================
+=
+= Na Criteria API
+=
+==============================================
+Herformuleren van de query op basis van de Criteria API. TypeSafe!
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Cigar> query = cb.createQuery(Cigar.class);
+        Root<Cigar> root = query.from(Cigar.class);
+        query.orderBy(cb.asc(root.get(Cigar_.name)));
+
+
+==============================================
+=
+= EJB 3.1, na EJB 3.1 Lite
+=
+==============================================
+Opslaan van nieuw object --> TransactionRequiredException
+
+==> Integratie CDI - EJB, toevoegen van @Stateless op Service
+
+==> Integratie met de Validation specificatie
+Afdwingen constraint lengte naam
+
