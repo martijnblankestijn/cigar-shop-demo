@@ -65,7 +65,7 @@ Cigar aanpassen ==> toevoegen  @Entiteit en @Id @GeneratedValue
 CigarServiceImpl
 Formuleren van de query m.b.v. JPQL. Aangeven dat dit ook al mogelijk was in JPA 1.0
     @PersistenceContext private EntityManager em;
- return em.createQuery("select c from Cigar c").getResultList();
+ return em.createQuery("select c from Cigar c order by c.name").getResultList();
 
 
 ==============================================
