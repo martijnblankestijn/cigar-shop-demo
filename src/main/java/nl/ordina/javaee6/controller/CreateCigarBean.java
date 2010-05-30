@@ -37,6 +37,7 @@ public class CreateCigarBean {
 
 
     public String create() {
+        System.out.println("Creating cigar " + cigar.getName());
         cigarService.persist(cigar);
 
         external.getFlash().setKeepMessages(true);

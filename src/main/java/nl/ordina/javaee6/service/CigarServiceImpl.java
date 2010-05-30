@@ -31,7 +31,7 @@ public class CigarServiceImpl implements CigarService {
 
     @Override
     public void persist(Cigar cigar) {
-        System.out.println("Persisting new cigar");
+        System.out.println("Persisting new cigar: " + cigar.getName());
         em.persist(cigar);
     }
 }
