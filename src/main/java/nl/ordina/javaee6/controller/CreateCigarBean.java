@@ -17,7 +17,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
-@Model
 public class CreateCigarBean {
     private CigarService cigarService;
     private FacesContext ctx;
@@ -27,8 +26,7 @@ public class CreateCigarBean {
     public CreateCigarBean() {
     }
 
-    @Inject
-    public CreateCigarBean(@New Cigar cigar, ExternalContext external, FacesContext ctx, CigarService cigarService) {
+    public CreateCigarBean(Cigar cigar, ExternalContext external, FacesContext ctx, CigarService cigarService) {
         this.external = external;
         this.ctx = ctx;
         this.cigarService = cigarService;
@@ -41,22 +39,10 @@ public class CreateCigarBean {
 
         external.getFlash().setKeepMessages(true);
         ctx.addMessage(null, new FacesMessage("Give that man a cigar!!"));
-        return "cigars?faces-redirect=true";
+        return "cigars";
     }
 
     public Cigar getCigar() {
         return cigar;
-    }
-
-    @Produces
-    @RequestScoped
-    public FacesContext createFacesContext() {
-        return FacesContext.getCurrentInstance();
-    }
-
-    @Produces
-    @RequestScoped
-    public ExternalContext createExternalContext(FacesContext context) {
-        return context.getExternalContext();
     }
 }

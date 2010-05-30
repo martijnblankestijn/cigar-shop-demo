@@ -8,17 +8,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
-@Entity
 public class Cigar {
-    @Id @GeneratedValue
-    private Long id;
-
-    @NotNull
-    @Size(min = 3, max = 20)
     private String name;
-
-    @NotNull(message = "You better not forget the price, boy")
-    @Digits(integer = 3, fraction = 2)
     private BigDecimal price;
 
     public Cigar() {

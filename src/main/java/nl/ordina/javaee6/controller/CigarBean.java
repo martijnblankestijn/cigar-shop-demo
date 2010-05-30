@@ -11,14 +11,12 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
 
-@Model
 public class CigarBean {
     private List<Cigar> cigars;
 
     public CigarBean(){
     }
 
-    @Inject
     public CigarBean(CigarService cigarService) {
         cigars = cigarService.getCigars();
     }
