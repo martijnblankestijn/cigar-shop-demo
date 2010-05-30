@@ -4,30 +4,23 @@ import nl.ordina.javaee6.domain.Cigar;
 import nl.ordina.javaee6.service.CigarService;
 
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Model;
-import javax.enterprise.inject.New;
 import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.math.BigDecimal;
+
 public class CreateCigarBean {
     private CigarService cigarService;
-    private FacesContext ctx;
-    private ExternalContext external;
+    private FacesContext facesContext;
+    private ExternalContext externalContext;
     private Cigar cigar;
 
     public CreateCigarBean() {
     }
 
-    public CreateCigarBean(Cigar cigar, ExternalContext external, FacesContext ctx, CigarService cigarService) {
-        this.external = external;
-        this.ctx = ctx;
+    public CreateCigarBean(Cigar cigar, ExternalContext externalContext, FacesContext facesContext, CigarService cigarService) {
+        this.externalContext = externalContext;
+        this.facesContext = facesContext;
         this.cigarService = cigarService;
         this.cigar = cigar;
     }
@@ -38,11 +31,12 @@ public class CreateCigarBean {
         
         cigarService.persist(cigar);
 
-        ctx.addMessage(null, new FacesMessage("Give that man a cigar!!"));
+        facesContext.addMessage(null, new FacesMessage("Give that man a cigar!!"));
         return "cigars";
     }
 
     public Cigar getCigar() {
         return cigar;
     }
+
 }
